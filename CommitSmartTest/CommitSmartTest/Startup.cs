@@ -11,6 +11,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
+using CommitSmartTest.Services;
+using CommitSmartTest.Models;
 
 namespace CommitSmartTest
 {
@@ -26,6 +29,9 @@ namespace CommitSmartTest
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+
+            services.AddDbContext<APIDbContext>(opt => opt.UseInMemoryDatabase("BankTest"));
+
             services.AddControllers();
 
             services.AddSwaggerGen(c =>
@@ -70,10 +76,85 @@ namespace CommitSmartTest
 
             app.UseAuthorization();
 
+
+            using (var serviceScope = app.ApplicationServices.CreateScope())
+            {
+                var context = serviceScope.ServiceProvider.GetService<APIDbContext>();
+                DatabaseSeeding(context);
+            }
+
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
             });
+
         }
+
+        /// <summary>
+        /// Seed the database.
+        /// </summary>
+        /// <param name="context"></param>
+        private void DatabaseSeeding(APIDbContext context)
+        {
+            var testUser1 = new User
+            {
+                UserId = Global.TestUserId,
+                FirstName = "Luke",
+                LastName = "Skywalker"
+            };
+            context.Users.Add(testUser1);
+            context.SaveChanges();
+
+            var accountWallet = new Account()
+            {
+                AccountNumber = 0,
+                Name = "wallet",
+                AccountType = (int)AccountTypes.Wallet,
+                Balance = 0,
+                ModifyDate = DateTime.Now,
+                User = testUser1,
+            };
+            context.Accounts.Add(accountWallet);
+            context.SaveChanges();
+
+            var account1 = new Account()
+            {
+                AccountNumber = 1,
+                Name = "main account",
+                AccountType = (int) AccountTypes.BankAccount,
+                Balance = 100,
+                ModifyDate = DateTime.Now,
+                User = testUser1,         
+            };
+            context.Accounts.Add(account1);
+            context.SaveChanges();
+
+            var account2 = new Account()
+            {
+                AccountNumber = 2,
+                AccountType = (int)AccountTypes.BankAccount,
+                Name = "savings",
+                Balance = (decimal)2.2f,
+                ModifyDate = DateTime.Now,
+                User = testUser1,
+            };
+            context.Accounts.Add(account2);
+            context.SaveChanges();
+
+            var transaction1_account1 = new TransactionData()
+            {
+                AccountNumber = account1.AccountNumber,
+                Date = DateTime.Now.AddDays(-1),
+                TransactionType = TransactionType.Deposit.ToString(),
+                Amount = 100,
+                CurrentBalance = 100,
+                Comment = "starting deposit",
+            };
+
+            context.Transactions.Add(transaction1_account1);
+            context.SaveChanges();
+
+        }
+
     }
 }
