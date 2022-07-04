@@ -19,3 +19,9 @@ C:\Development\commitsmart\CommitSmartTest\CommitSmartTest\CommitSmartTest\obj\D
 C:\Development\commitsmart\CommitSmartTest\CommitSmartTest\CommitSmartTest\obj\Debug\netcoreapp3.1\CommitSmartTest.dll
 C:\Development\commitsmart\CommitSmartTest\CommitSmartTest\CommitSmartTest\obj\Debug\netcoreapp3.1\CommitSmartTest.pdb
 C:\Development\commitsmart\CommitSmartTest\CommitSmartTest\CommitSmartTest\obj\Debug\netcoreapp3.1\CommitSmartTest.genruntimeconfig.cache
+C:\Development\commitsmart\CommitSmartTest\CommitSmartTest\CommitSmartTest\bin\Debug\netcoreapp3.1\Microsoft.OpenApi.dll
+C:\Development\commitsmart\CommitSmartTest\CommitSmartTest\CommitSmartTest\bin\Debug\netcoreapp3.1\Swashbuckle.AspNetCore.Swagger.dll
+C:\Development\commitsmart\CommitSmartTest\CommitSmartTest\CommitSmartTest\bin\Debug\netcoreapp3.1\Swashbuckle.AspNetCore.SwaggerGen.dll
+C:\Development\commitsmart\CommitSmartTest\CommitSmartTest\CommitSmartTest\bin\Debug\netcoreapp3.1\Swashbuckle.AspNetCore.SwaggerUI.dll
+C:\Development\commitsmart\CommitSmartTest\CommitSmartTest\CommitSmartTest\obj\Debug\netcoreapp3.1\CommitSmartTest.MvcApplicationPartsAssemblyInfo.cs
+C:\Development\commitsmart\CommitSmartTest\CommitSmartTest\CommitSmartTest\obj\Debug\netcoreapp3.1\CommitSmartTest.csproj.CopyComplete
