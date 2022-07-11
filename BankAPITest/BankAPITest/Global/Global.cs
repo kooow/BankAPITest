@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace CommitSmartTest
+namespace BankAPITest
 {
     public static class Global
     {

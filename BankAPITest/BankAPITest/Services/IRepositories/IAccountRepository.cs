@@ -1,8 +1,8 @@
-﻿using CommitSmartTest.Models;
-using CommitSmartTest.Services.IRepositories;
+﻿using BankAPITest.Models;
+using BankAPITest.Services.IRepositories;
 using System.Collections.Generic;
 
-namespace CommitSmartTest.Services.IRepositories
+namespace BankAPITest.Services.IRepositories
 {
     public interface IAccountRepository : IRepository<Account>
     {

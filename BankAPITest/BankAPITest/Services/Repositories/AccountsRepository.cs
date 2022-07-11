@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Linq;
 using System.Linq.Expressions;
-using CommitSmartTest.Services;
-using CommitSmartTest.Models;
+using BankAPITest.Services;
+using BankAPITest.Models;
 using System.Collections.Generic;
 
-namespace CommitSmartTest.Services.Repositories
+namespace BankAPITest.Services.Repositories
 {
 
     public class AccountsRepository : Repository<Account>

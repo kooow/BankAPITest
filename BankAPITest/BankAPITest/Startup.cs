@@ -12,10 +12,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
-using CommitSmartTest.Services;
-using CommitSmartTest.Models;
+using BankAPITest.Services;
+using BankAPITest.Models;
 
-namespace CommitSmartTest
+namespace BankAPITest
 {
     public class Startup
     {

@@ -3,10 +3,10 @@ using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
-using CommitSmartTest.Services.IRepositories;
+using BankAPITest.Services.IRepositories;
 using System.Linq.Expressions;
 
-namespace CommitSmartTest.Services.Repositories
+namespace BankAPITest.Services.Repositories
 {
 
     public class Repository<TEntity> : IRepository<TEntity> where TEntity : class

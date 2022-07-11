@@ -1,4 +1,4 @@
-﻿namespace CommitSmartTest.Models
+﻿namespace BankAPITest.Models
 {
 
     public enum AccountTypes

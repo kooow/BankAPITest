@@ -1,5 +1,5 @@
 ﻿
-namespace CommitSmartTest.Models
+namespace BankAPITest.Models
 {
     /// <summary>
     /// 

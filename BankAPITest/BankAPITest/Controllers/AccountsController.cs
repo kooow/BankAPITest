@@ -1,6 +1,6 @@
-﻿using CommitSmartTest.Models;
-using CommitSmartTest.Services;
-using CommitSmartTest.Services.Repositories;
+﻿using BankAPITest.Models;
+using BankAPITest.Services;
+using BankAPITest.Services.Repositories;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -10,7 +10,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace CommitSmartTest.Controllers
+namespace BankAPITest.Controllers
 {
     [ApiController]
     [Route("[controller]")]

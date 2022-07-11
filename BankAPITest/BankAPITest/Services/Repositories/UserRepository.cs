@@ -1,7 +1,7 @@
-﻿using CommitSmartTest.Models;
+﻿using BankAPITest.Models;
 using System.Collections.Generic;
 
-namespace CommitSmartTest.Services.Repositories
+namespace BankAPITest.Services.Repositories
 {
 
     public class UserRepository : Repository<User>
