@@ -4,6 +4,11 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <AssemblyName>BankAPITest</AssemblyName>
     <RootNamespace>BankAPITest</RootNamespace>
+    <StartupObject>BankAPITest.Program</StartupObject>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <OutputPath>Out\</OutputPath>
   </PropertyGroup>
 
   <ItemGroup>

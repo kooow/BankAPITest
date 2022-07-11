@@ -1,5 +1,6 @@
 ﻿using BankAPITest.Entities;
 using BankAPITest.Services;
+using BankAPITest.Services.IRepositories;
 using BankAPITest.Services.Repositories;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -22,15 +23,15 @@ namespace BankAPITest.Controllers
 
         private readonly ILogger<TransactionController> logger;
 
-        private readonly TransactionDataRepository transactionsRepository;
+        private readonly ITransactionDataRepository transactionsRepository;
 
-        private readonly AccountsRepository accountsRepository;
+        private readonly IAccountsRepository accountsRepository;
 
-        public TransactionController(ILogger<TransactionController> logger, APIDbContext dbContext)
+        public TransactionController(ILogger<TransactionController> logger, ITransactionDataRepository transactionRepository, IAccountsRepository accountsRepository)
         {
             this.logger = logger;
-            transactionsRepository = new TransactionDataRepository(dbContext);
-            accountsRepository = new AccountsRepository(dbContext);
+            this.transactionsRepository = transactionRepository;
+            this.accountsRepository = accountsRepository;
         }
 
 

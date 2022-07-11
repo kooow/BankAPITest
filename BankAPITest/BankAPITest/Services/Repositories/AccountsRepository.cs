@@ -4,15 +4,16 @@ using System.Linq.Expressions;
 using BankAPITest.Services;
 using BankAPITest.Entities;
 using System.Collections.Generic;
+using BankAPITest.Services.IRepositories;
 
 namespace BankAPITest.Services.Repositories
 {
 
-    public class AccountsRepository : Repository<Account>
+    public class AccountsRepository : Repository<Account>, IAccountsRepository
     {
 
         public AccountsRepository(APIDbContext context) : base(context) 
-        { 
+        {
         }
 
         public IEnumerable<Account> GetAccountsByUser(int userId, bool filteredWallet)

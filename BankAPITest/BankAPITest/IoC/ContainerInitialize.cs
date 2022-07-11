@@ -8,7 +8,6 @@ public static class ContainerInitialize
     public static void Init(IServiceCollection services, IConfiguration config, bool testInit = false)
     {
         SetupRepositories(services);
-
     }
 
 
@@ -16,8 +15,8 @@ public static class ContainerInitialize
     {
         services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
 
-
-        // services.AddScoped<IAccountRepository, AccountsRepository>();
+        services.AddScoped<IAccountsRepository, AccountsRepository>();
+        services.AddScoped<ITransactionDataRepository, TransactionDataRepository>();
 
     }
 

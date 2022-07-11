@@ -4,19 +4,18 @@ using System.Linq.Expressions;
 using BankAPITest.Services;
 using BankAPITest.Entities;
 using System.Collections.Generic;
+using BankAPITest.Services.IRepositories;
 
 namespace BankAPITest.Services.Repositories
 {
 
-    public class TransactionDataRepository : Repository<TransactionData>
+    public class TransactionDataRepository : Repository<TransactionData>, ITransactionDataRepository
     {
         public TransactionDataRepository(APIDbContext context) : base(context) { }
 
         public bool CreateTransfer(int userId, int accountNumberFrom, int accountNumberTo, decimal amount, string comment)
         {
             var apiDbContext = Context as APIDbContext;
-
-            // TODO: validation 
 
             var from_account = (from a in apiDbContext.Accounts
                                 where a.User.Id == userId && a.AccountNumber == accountNumberFrom
