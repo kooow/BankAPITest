@@ -5,16 +5,16 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace BankAPITest.Models
+namespace BankAPITest.Entities
 {
 
     /// <summary>
     /// 
     /// </summary>
-    public class TransactionData
+    public class TransactionData : IEntityBase
     {
         [Key]
-        public long TransactionId { get; set; }
+        public int Id { get; set; }
 
         [ForeignKey("AccountNumber")] 
         public int AccountNumber { get; set; }

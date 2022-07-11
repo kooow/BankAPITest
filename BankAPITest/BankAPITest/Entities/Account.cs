@@ -3,15 +3,15 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
 
-namespace BankAPITest.Models
+namespace BankAPITest.Entities
 {
     /// <summary>
     /// 
     /// </summary>
-    public class Account
+    public class Account : IEntityBase
     {
         [Key]
-        public int AccountId { get; set; }
+        public int Id { get; set; }
 
         public string Name { get; set; }
 

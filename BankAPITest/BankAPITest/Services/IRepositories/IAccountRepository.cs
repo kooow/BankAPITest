@@ -1,4 +1,4 @@
-﻿using BankAPITest.Models;
+﻿using BankAPITest.Entities;
 using BankAPITest.Services.IRepositories;
 using System.Collections.Generic;
 

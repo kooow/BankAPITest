@@ -13,7 +13,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using BankAPITest.Services;
-using BankAPITest.Models;
+using BankAPITest.Entities;
 
 namespace BankAPITest
 {
@@ -31,6 +31,8 @@ namespace BankAPITest
         {
 
             services.AddDbContext<APIDbContext>(opt => opt.UseInMemoryDatabase("BankTest"));
+
+            ContainerInitialize.Init(services, Configuration);
 
             services.AddControllers();
 
@@ -98,7 +100,7 @@ namespace BankAPITest
         {
             var testUser1 = new User
             {
-                UserId = Global.TestUserId,
+                Id = Global.TestUserId,
                 FirstName = "Luke",
                 LastName = "Skywalker"
             };

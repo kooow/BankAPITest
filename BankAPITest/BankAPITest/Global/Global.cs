@@ -8,7 +8,7 @@ namespace BankAPITest
     public static class Global
     {
 
-        public static string TestUserId = "testuser";
+        public static int TestUserId = 1;
 
     }
 }

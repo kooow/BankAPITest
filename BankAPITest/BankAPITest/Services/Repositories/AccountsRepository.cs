@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Linq.Expressions;
 using BankAPITest.Services;
-using BankAPITest.Models;
+using BankAPITest.Entities;
 using System.Collections.Generic;
 
 namespace BankAPITest.Services.Repositories
@@ -15,12 +15,12 @@ namespace BankAPITest.Services.Repositories
         { 
         }
 
-        public IEnumerable<Account> GetAccountsByUser(string userId, bool filteredWallet)
+        public IEnumerable<Account> GetAccountsByUser(int userId, bool filteredWallet)
         {
             var apiDbContext = Context as APIDbContext;
 
             IQueryable<Account> accounts = from ac in apiDbContext.Accounts
-                           where ac.User.UserId.Equals(userId)
+                           where ac.User.Id.Equals(userId)
                          
                            select ac;
 
@@ -33,13 +33,13 @@ namespace BankAPITest.Services.Repositories
             return accounts.ToList();
         }
 
-        public Account GetWalletByUser(string userId)
+        public Account GetWalletByUser(int userId)
         {
             var apiDbContext = Context as APIDbContext;
 
             var walletAccount =
                 ( from ac in apiDbContext.Accounts
-                where ac.User.UserId.Equals(userId)
+                where ac.User.Id.Equals(userId)
                 && ac.AccountType == (int)AccountTypes.Wallet
                 select ac).FirstOrDefault();
 

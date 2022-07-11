@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Linq.Expressions;
 using BankAPITest.Services;
-using BankAPITest.Models;
+using BankAPITest.Entities;
 using System.Collections.Generic;
 
 namespace BankAPITest.Services.Repositories
@@ -12,18 +12,18 @@ namespace BankAPITest.Services.Repositories
     {
         public TransactionDataRepository(APIDbContext context) : base(context) { }
 
-        public bool CreateTransfer(string userId, int accountNumberFrom, int accountNumberTo, decimal amount, string comment)
+        public bool CreateTransfer(int userId, int accountNumberFrom, int accountNumberTo, decimal amount, string comment)
         {
             var apiDbContext = Context as APIDbContext;
 
             // TODO: validation 
 
             var from_account = (from a in apiDbContext.Accounts
-                                where a.User.UserId == userId && a.AccountNumber == accountNumberFrom
+                                where a.User.Id == userId && a.AccountNumber == accountNumberFrom
                                 select a).FirstOrDefault();
 
             var to_account = (from a in apiDbContext.Accounts
-                                where a.User.UserId == userId && a.AccountNumber == accountNumberFrom
+                                where a.User.Id == userId && a.AccountNumber == accountNumberFrom
                               select a).FirstOrDefault();
 
 
@@ -56,14 +56,14 @@ namespace BankAPITest.Services.Repositories
             return true;
         }
 
-        public IEnumerable<TransactionData> GetUserTransactions(string userId, bool orderByDate)
+        public IEnumerable<TransactionData> GetUserTransactions(int userId, bool orderByDate)
         {
             var apiDbContext = Context as APIDbContext;
 
             IQueryable<TransactionData> transactions = from a in apiDbContext.Accounts
                 join t in apiDbContext.Transactions
                            on a.AccountNumber equals t.AccountNumber
-                where a.User.UserId == userId
+                where a.User.Id == userId
                 select t;
 
             if (orderByDate)
@@ -79,7 +79,7 @@ namespace BankAPITest.Services.Repositories
             return transactions.ToList();
         }
 
-        public IEnumerable<TransactionData> GetUserTransactionsFiltered(string userId, TransactionType? transactionType, DateTime? dateFrom, DateTime? dateTo)
+        public IEnumerable<TransactionData> GetUserTransactionsFiltered(int userId, TransactionType? transactionType, DateTime? dateFrom, DateTime? dateTo)
         {
             var apiDbContext = Context as APIDbContext;
 
@@ -87,7 +87,7 @@ namespace BankAPITest.Services.Repositories
                 from a in apiDbContext.Accounts
                 join t in apiDbContext.Transactions
                            on a.AccountNumber equals t.AccountNumber
-                where a.User.UserId == userId
+                where a.User.Id == userId
                 select t;
 
             if (transactionType.HasValue)

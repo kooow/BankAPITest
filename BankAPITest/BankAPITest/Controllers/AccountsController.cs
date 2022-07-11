@@ -1,4 +1,4 @@
-﻿using BankAPITest.Models;
+﻿using BankAPITest.Entities;
 using BankAPITest.Services;
 using BankAPITest.Services.Repositories;
 using Microsoft.AspNetCore.Http;

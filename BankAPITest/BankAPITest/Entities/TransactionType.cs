@@ -1,5 +1,5 @@
 ﻿
-namespace BankAPITest.Models
+namespace BankAPITest.Entities
 {
     /// <summary>
     /// 

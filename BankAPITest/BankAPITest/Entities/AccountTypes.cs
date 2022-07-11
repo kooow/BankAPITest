@@ -1,4 +1,4 @@
-﻿namespace BankAPITest.Models
+﻿namespace BankAPITest.Entities
 {
 
     public enum AccountTypes
