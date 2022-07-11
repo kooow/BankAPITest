@@ -2,6 +2,8 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
+    <AssemblyName>BankAPITest</AssemblyName>
+    <RootNamespace>BankAPITest</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
