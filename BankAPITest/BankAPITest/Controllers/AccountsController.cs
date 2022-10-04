@@ -1,15 +1,10 @@
 ﻿using BankAPITest.Entities;
-using BankAPITest.Services;
 using BankAPITest.Services.IRepositories;
-using BankAPITest.Services.Repositories;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace BankAPITest.Controllers
 {
@@ -20,14 +15,14 @@ namespace BankAPITest.Controllers
     public class AccountsController : ControllerBase
     {
 
-        private readonly ILogger<AccountsController> logger;
+        private readonly ILogger<AccountsController> _logger;
 
-        private readonly IAccountsRepository accountsRepository;
+        private readonly IAccountsRepository _accountsRepository;
 
         public AccountsController(ILogger<AccountsController> logger, IAccountsRepository accountsRepository)
         {
-            this.logger = logger;
-            this.accountsRepository = accountsRepository;
+            this._logger = logger;
+            this._accountsRepository = accountsRepository;
         }
 
         [HttpGet]
@@ -35,9 +30,8 @@ namespace BankAPITest.Controllers
         [ProducesResponseType(typeof(string), StatusCodes.Status400BadRequest)]
         public IEnumerable<Account> GetAccounts()
         {
-            var accounts = accountsRepository.GetAccountsByUser(Global.TestUserId, true);
+            var accounts = _accountsRepository.GetAccountsByUser(Global.TestUserId, true);
             return accounts;
         }
-
     }
 }

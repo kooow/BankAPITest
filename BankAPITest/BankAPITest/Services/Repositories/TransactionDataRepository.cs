@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Linq;
-using System.Linq.Expressions;
-using BankAPITest.Services;
 using BankAPITest.Entities;
 using System.Collections.Generic;
 using BankAPITest.Services.IRepositories;
@@ -17,37 +15,37 @@ namespace BankAPITest.Services.Repositories
         {
             var apiDbContext = Context as APIDbContext;
 
-            var from_account = (from a in apiDbContext.Accounts
+            var fromAccount = (from a in apiDbContext.Accounts
                                 where a.User.Id == userId && a.AccountNumber == accountNumberFrom
                                 select a).FirstOrDefault();
 
-            var to_account = (from a in apiDbContext.Accounts
+            var toAccount = (from a in apiDbContext.Accounts
                                 where a.User.Id == userId && a.AccountNumber == accountNumberFrom
                               select a).FirstOrDefault();
 
 
-            var transaction1_from = new TransactionData()
+            var transaction1From = new TransactionData()
             {
                 AccountNumber = accountNumberFrom,
                 Date = DateTime.Now,
                 TransactionType = TransactionType.Withdrawal.ToString(),
                 Amount = -amount,
-                CurrentBalance = from_account.Balance - amount,
+                CurrentBalance = fromAccount.Balance - amount,
                 Comment = comment,
             };
 
-            var transaction1_to = new TransactionData()
+            var transaction1To = new TransactionData()
             {
                 AccountNumber = accountNumberTo,
                 Date = DateTime.Now,
                 TransactionType = TransactionType.Deposit.ToString(),
                 Amount = amount,
-                CurrentBalance = from_account.Balance + amount,
+                CurrentBalance = fromAccount.Balance + amount,
                 Comment = comment,
             };
 
-            apiDbContext.Transactions.Add(transaction1_from);
-            apiDbContext.Transactions.Add(transaction1_to);
+            apiDbContext.Transactions.Add(transaction1From);
+            apiDbContext.Transactions.Add(transaction1To);
             apiDbContext.SaveChanges();
 
             // TODO: error handling
@@ -69,12 +67,11 @@ namespace BankAPITest.Services.Repositories
             {
                 transactions = transactions.OrderBy(tr => tr.Date);
             }
-
             else
             {
                 transactions = transactions.OrderByDescending(tr => tr.Date);
             }
-             
+
             return transactions.ToList();
         }
 

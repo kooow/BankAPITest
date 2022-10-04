@@ -1,16 +1,10 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using BankAPITest.Services;
 using BankAPITest.Entities;
@@ -147,7 +141,7 @@ namespace BankAPITest
             context.Accounts.Add(account2);
             context.SaveChanges();
 
-            var transaction1_account1 = new TransactionData()
+            var transaction1Account1 = new TransactionData()
             {
                 AccountNumber = account1.AccountNumber,
                 Date = DateTime.Now.AddDays(-1),
@@ -157,9 +151,8 @@ namespace BankAPITest
                 Comment = "starting deposit",
             };
 
-            context.Transactions.Add(transaction1_account1);
+            context.Transactions.Add(transaction1Account1);
             context.SaveChanges();
-
         }
 
     }

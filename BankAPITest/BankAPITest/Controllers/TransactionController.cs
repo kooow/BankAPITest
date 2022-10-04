@@ -1,16 +1,11 @@
 ﻿using BankAPITest.Entities;
-using BankAPITest.Services;
 using BankAPITest.Services.IRepositories;
-using BankAPITest.Services.Repositories;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Threading.Tasks;
 
 namespace BankAPITest.Controllers
 {
@@ -21,17 +16,17 @@ namespace BankAPITest.Controllers
     public class TransactionController : ControllerBase
     {
 
-        private readonly ILogger<TransactionController> logger;
+        private readonly ILogger<TransactionController> _logger;
 
-        private readonly ITransactionDataRepository transactionsRepository;
+        private readonly ITransactionDataRepository _transactionsRepository;
 
-        private readonly IAccountsRepository accountsRepository;
+        private readonly IAccountsRepository _accountsRepository;
 
         public TransactionController(ILogger<TransactionController> logger, ITransactionDataRepository transactionRepository, IAccountsRepository accountsRepository)
         {
-            this.logger = logger;
-            this.transactionsRepository = transactionRepository;
-            this.accountsRepository = accountsRepository;
+            this._logger = logger;
+            this._transactionsRepository = transactionRepository;
+            this._accountsRepository = accountsRepository;
         }
 
 
@@ -40,8 +35,8 @@ namespace BankAPITest.Controllers
         [ProducesResponseType(typeof(string), StatusCodes.Status400BadRequest)]
         public IEnumerable<TransactionData> GetTransactionsHistory()
         {
-            var trans = transactionsRepository.GetUserTransactions(Global.TestUserId, true);
-            return trans;
+            var transactions = _transactionsRepository.GetUserTransactions(Global.TestUserId, true);
+            return transactions;
         }
 
         [HttpGet("TransactionsFiltered")]
@@ -49,8 +44,8 @@ namespace BankAPITest.Controllers
         [ProducesResponseType(typeof(string), StatusCodes.Status400BadRequest)]
         public IEnumerable<TransactionData> GetTransactionsFiltered(TransactionType? type, DateTime? from, DateTime? to)
         {
-            var trans = transactionsRepository.GetUserTransactionsFiltered(Global.TestUserId, type, from, to);
-            return trans;
+            var tranactions = _transactionsRepository.GetUserTransactionsFiltered(Global.TestUserId, type, from, to);
+            return tranactions;
         }
 
         [HttpPost("CreateTransfer")]
@@ -61,9 +56,9 @@ namespace BankAPITest.Controllers
 
             // TODO: accountRepository - possible to transfer
 
-            bool transfer_result = transactionsRepository.CreateTransfer(Global.TestUserId, accountNumberFrom, accountNumberTo, amount, comment);
+            bool transferResult = _transactionsRepository.CreateTransfer(Global.TestUserId, accountNumberFrom, accountNumberTo, amount, comment);
 
-            if (!transfer_result)
+            if (!transferResult)
             {
                 return "Transaction error";
             }
@@ -78,10 +73,10 @@ namespace BankAPITest.Controllers
  
         public string CreateDeposit(int targetAccountNumber, decimal amount)
         {
-            var walletAccount = accountsRepository.GetWalletByUser(Global.TestUserId);
-            bool transfer_result = transactionsRepository.CreateTransfer(Global.TestUserId, walletAccount.AccountNumber, targetAccountNumber, amount, "deposit");
+            var walletAccount = _accountsRepository.GetWalletByUser(Global.TestUserId);
+            bool transferResult = _transactionsRepository.CreateTransfer(Global.TestUserId, walletAccount.AccountNumber, targetAccountNumber, amount, "deposit");
 
-            if (!transfer_result)
+            if (!transferResult)
             {
                 return "Transaction error";
             }
@@ -95,10 +90,10 @@ namespace BankAPITest.Controllers
 
         public string CreateWithdrawal(int fromAccountNumber, decimal amount)
         {
-            var walletAccount = accountsRepository.GetWalletByUser(Global.TestUserId);
+            var walletAccount = _accountsRepository.GetWalletByUser(Global.TestUserId);
 
-            bool transfer_result = transactionsRepository.CreateTransfer(Global.TestUserId, fromAccountNumber, walletAccount.AccountNumber, amount, "withdrawal");
-            if (!transfer_result)
+            bool transferResult = _transactionsRepository.CreateTransfer(Global.TestUserId, fromAccountNumber, walletAccount.AccountNumber, amount, "withdrawal");
+            if (!transferResult)
             {
                 return "Transaction error";
             }

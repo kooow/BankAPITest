@@ -10,14 +10,11 @@ public static class ContainerInitialize
         SetupRepositories(services);
     }
 
-
     private static void SetupRepositories(IServiceCollection services)
     {
         services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
 
         services.AddScoped<IAccountsRepository, AccountsRepository>();
         services.AddScoped<ITransactionDataRepository, TransactionDataRepository>();
-
     }
-
 }

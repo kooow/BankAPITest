@@ -1,5 +1,4 @@
 ﻿using BankAPITest.Entities;
-using BankAPITest.Services.IRepositories;
 using System.Collections.Generic;
 
 namespace BankAPITest.Services.IRepositories

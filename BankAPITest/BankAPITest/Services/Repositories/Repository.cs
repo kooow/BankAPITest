@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Linq;
-using System.Collections;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using BankAPITest.Services.IRepositories;
@@ -78,6 +77,5 @@ namespace BankAPITest.Services.Repositories
                 throw ex;
             }
         }
-
     }
 }
