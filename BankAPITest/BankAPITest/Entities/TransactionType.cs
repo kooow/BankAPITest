@@ -1,13 +1,11 @@
 ﻿
-namespace BankAPITest.Entities
-{
-    /// <summary>
-    /// 
-    /// </summary>
-    public enum TransactionType
-    {
-        Deposit = 1,
-        Withdrawal = 2
-    }
+namespace BankAPITest.Entities;
 
+/// <summary>
+/// TransactionType enum representing the type of transaction.
+/// </summary>
+public enum TransactionType
+{
+    Deposit = 1,
+    Withdrawal = 2
 }

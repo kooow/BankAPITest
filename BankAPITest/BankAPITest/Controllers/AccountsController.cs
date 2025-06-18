@@ -6,32 +6,40 @@ using Microsoft.Extensions.Logging;
 using System.Collections;
 using System.Collections.Generic;
 
-namespace BankAPITest.Controllers
+namespace BankAPITest.Controllers;
+
+/// <summary>
+/// Accounts controller for managing user accounts
+/// </summary>
+[ApiController]
+[Route("[controller]")]
+[Produces("application/json")]
+[ProducesResponseType(typeof(string), StatusCodes.Status500InternalServerError)]
+public class AccountsController : ControllerBase
 {
-    [ApiController]
-    [Route("[controller]")]
-    [Produces("application/json")]
-    [ProducesResponseType(typeof(string), StatusCodes.Status500InternalServerError)]
-    public class AccountsController : ControllerBase
+    private readonly ILogger<AccountsController> m_logger;
+    private readonly IAccountsRepository m_accountsRepository;
+
+    /// <summary>
+    /// Constructor
+    /// </summary>
+    /// <param name="logger">Logger</param>
+    /// <param name="accountsRepository">Accounts repository</param>
+    public AccountsController(ILogger<AccountsController> logger, IAccountsRepository accountsRepository)
     {
+        m_logger = logger;
+        m_accountsRepository = accountsRepository;
+    }
 
-        private readonly ILogger<AccountsController> _logger;
-
-        private readonly IAccountsRepository _accountsRepository;
-
-        public AccountsController(ILogger<AccountsController> logger, IAccountsRepository accountsRepository)
-        {
-            this._logger = logger;
-            this._accountsRepository = accountsRepository;
-        }
-
-        [HttpGet]
-        [ProducesResponseType(typeof(IEnumerable), StatusCodes.Status200OK)]
-        [ProducesResponseType(typeof(string), StatusCodes.Status400BadRequest)]
-        public IEnumerable<Account> GetAccounts()
-        {
-            var accounts = _accountsRepository.GetAccountsByUser(Global.TestUserId, true);
-            return accounts;
-        }
+    /// <summary>
+    /// Get accounts for the test user
+    /// </summary>
+    /// <returns>Account list</returns>
+    [HttpGet]
+    [ProducesResponseType(typeof(IEnumerable), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(string), StatusCodes.Status400BadRequest)]
+    public IEnumerable<Account> GetAccounts()
+    {
+        return m_accountsRepository.GetAccountsByUser(Global.TestUserId, true);
     }
 }

@@ -1,10 +1,10 @@
-﻿namespace BankAPITest.Entities
+﻿namespace BankAPITest.Entities;
+
+/// <summary>
+/// Account types enumeration
+/// </summary>
+public enum AccountTypes
 {
-
-    public enum AccountTypes
-    {
-        BankAccount = 1,
-        Wallet = 2
-    }
-
+    BankAccount = 1,
+    Wallet = 2
 }
